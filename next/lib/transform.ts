@@ -1,4 +1,4 @@
-import * as matter from "gray-matter";
+import matter from "gray-matter";
 
 export interface Token {
   type: "markdown" | "live-editor" | "frontmatter";
