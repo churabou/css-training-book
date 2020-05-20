@@ -7,7 +7,7 @@ import Prism from "prismjs";
 const Wrapper = styled.div`
   .editor {
     position: relative;
-    height: 180px;
+    height: 300px;
     .title {
       width: 60px;
       height: 20px;

@@ -32,7 +32,6 @@ export interface Props {
 }
 
 const Menu: React.FC<Props> = ({ sections, LinkComponent }) => {
-  console.log(LinkComponent);
   return (
     <Wrapper>
       {sections.map((section: any, i: number) => (

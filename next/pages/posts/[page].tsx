@@ -89,7 +89,6 @@ const MarkdownBlock = ({ content }: { content: string }) => (
 // ぱすぱらむを取得すれば（static prposで)
 const createProps = (sections: Section[]): MenuProps => ({
   LinkComponent: (item: any) => {
-    console.log(item);
     return (
       <span>
         <a href={item.item.path}>{item.item.title}</a>
