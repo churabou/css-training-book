@@ -3,10 +3,8 @@ import styled from "styled-components";
 import CodeEditor, { useCodeEditor } from "./editor";
 
 const Wrapper = styled.div`
-  width: 700px;
-  padding: 30px;
-  background: #f7f7f7;
   display: flex;
+  margin: 60px 0px;
 
   * {
     box-sizing: border-box;
@@ -31,7 +29,8 @@ const Wrapper = styled.div`
 const LiveEditor: React.FC<{
   html: string;
   css: string;
-}> = ({ html, css }) => {
+  commonCSS?: string;
+}> = ({ html, css, commonCSS }) => {
   const htmlEditor = useCodeEditor({
     language: "html",
     content: html,
@@ -51,7 +50,7 @@ const LiveEditor: React.FC<{
         </div>
         <div className="right">
           <iframe
-            srcDoc={`<html><style>${cssEditor.content}</style><body>${htmlEditor.content}</body></html>`}
+            srcDoc={`<html><style>${commonCSS}${cssEditor.content}</style><body>${htmlEditor.content}</body></html>`}
           />
         </div>
       </Wrapper>

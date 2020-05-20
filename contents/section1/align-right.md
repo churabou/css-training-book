@@ -4,7 +4,9 @@ section: 1
 page: 6
 ---
 
-@COMMON_CSS
+共通 CSS
+
+@BEGIN_COMMON_CSS
 
 ```css
 :root {
@@ -12,11 +14,10 @@ page: 6
   background: #f4f4f4;
 }
 
-div {
+div.container {
   background: white;
   padding: 10px;
   width: 300px;
-  margin-bottom: 10px;
 }
 
 button {
@@ -28,6 +29,8 @@ button {
   font-weight: bold;
 }
 ```
+
+@END_COMMON_CSS
 
 ### flexbox を使う方法
 

@@ -1,37 +1,52 @@
 import matter from "gray-matter";
 
 export interface Token {
-  type: "markdown" | "live-editor" | "frontmatter";
+  type: "markdown" | "live-editor" | "frontmatter" | "common-css";
   value: any;
 }
 
 export const transformContent = (content: string) => {
   let results: Token[] = [];
-  let editor = false;
   let block = "";
 
   const data = matter(content);
 
   results.push({ type: "frontmatter", value: data.data });
 
+  let type: Token["type"] = "markdown";
+
   data.content.split("\n").forEach((line, i) => {
-    if (editor) {
-      if (line.includes("END_LIVE_EDITOR")) {
-        editor = false;
-        results.push({ type: "live-editor", value: block });
-        block = "";
-      } else {
-        block += line + "\n";
-      }
-    } else {
-      if (line.includes("BEGIN_LIVE_EDITOR")) {
+    if (line.includes("BEGIN_COMMON_CSS")) {
+      if (block !== "") {
         results.push({ type: "markdown", value: block });
-        block = "";
-        editor = true;
-      } else {
-        block += line + "\n";
       }
+      type = "common-css";
+      block = "";
+      return;
     }
+
+    if (line.includes("BEGIN_LIVE_EDITOR")) {
+      if (block !== "") {
+        results.push({ type: "markdown", value: block });
+      }
+      type = "live-editor";
+      block = "";
+      return;
+    }
+
+    if (line.includes("END_COMMON_CSS")) {
+      results.push({ type, value: block });
+      block = "";
+      return;
+    }
+
+    if (line.includes("END_LIVE_EDITOR")) {
+      results.push({ type, value: block });
+      block = "";
+      return;
+    }
+
+    block += line + "\n";
   });
 
   results.push({ type: "markdown", value: block });
@@ -43,10 +58,11 @@ export const transformContent = (content: string) => {
     }
     return next;
   });
+
   return results;
 };
 
-function pulckHtmlCss(content: string) {
+export function pulckHtmlCss(content: string) {
   let html = "";
   let css = "";
   let type: "html" | "css" | "none" = "none";

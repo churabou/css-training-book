@@ -4,7 +4,7 @@ import fs from "fs";
 import LiveEditor from "../../components/liveEditor";
 import ReactMarkdown from "react-markdown";
 import styled from "styled-components";
-import { transformContent, Token } from "../../lib/transform";
+import { transformContent, Token, pulckHtmlCss } from "../../lib/transform";
 import { Props as MenuProps } from "../../components/menu";
 
 interface Section {
@@ -100,11 +100,16 @@ const createProps = (sections: Section[]): MenuProps => ({
 
 const Page: React.FC<Props> = ({ post, sections }) => {
   const menuProps = createProps(sections);
+
+  const commonCSS = pulckHtmlCss(
+    post.contents.find((c) => c.type === "common-css").value
+  ).css;
+
   const Content = () => (
     <div style={{ padding: "40px" }}>
       {post.contents.map((content: Token, i: number) => {
         const key = `${content.type}-${i}`;
-        if (content.type === "markdown") {
+        if (content.type === "markdown" || content.type === "common-css") {
           return <MarkdownBlock key={key} content={content.value} />;
         }
         if (content.type === "frontmatter") {
@@ -114,7 +119,7 @@ const Page: React.FC<Props> = ({ post, sections }) => {
             </_MDWapper>
           );
         }
-        return <LiveEditor key={key} {...content.value} />;
+        return <LiveEditor key={key} {...{ commonCSS, ...content.value }} />;
       })}
     </div>
   );
