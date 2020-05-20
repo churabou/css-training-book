@@ -7,32 +7,49 @@ import styled from "styled-components";
 import { transformContent, Token } from "../../lib/transform";
 import { Props as MenuProps } from "../../components/menu";
 
-export async function getStaticPaths() {
-  // zeitが管理するレポジトリを(APIのデフォルトである)30件取得する
+const fetchSections = () => {
+  const postsDirectory = path.join(process.cwd(), "contents");
+  const sectionDirectories = fs.readdirSync(postsDirectory);
+  return sectionDirectories.map((section) => {
+    const filenames = fs.readdirSync(path.join(postsDirectory, section));
+    return {
+      title: section,
+      items: filenames.map((name) => ({
+        name,
+        filePath: `${section}.${name}`,
+      })),
+    };
+  });
+};
 
-  const paths = ["/posts/hoge", "/posts/foo"];
+const loadContent = (name: string) => {
+  const postsDirectory = path.join(process.cwd(), "contents", name);
+  const filePath = path.join(postsDirectory);
+  const fileContents = fs.readFileSync(filePath, "utf8");
+  const content = transformContent(fileContents);
+  return content;
+};
+
+export async function getStaticPaths() {
+  const contents = fetchSections().map((section) =>
+    section.items.map((item) => ({
+      params: { page: item.filePath, filePath: "hoge" },
+    }))
+  );
+
+  // flatten
+  const paths = Array.prototype.concat.apply([], contents);
   return { paths, fallback: false };
 }
 
-export async function getStaticProps({ params }) {
-  const postsDirectory = path.join(process.cwd(), "contents");
-  const sectionDirectories = fs.readdirSync(postsDirectory);
-
-  const posts = sectionDirectories.map((section) => {
-    const filenames = fs.readdirSync(path.join(postsDirectory, section));
-    return filenames.map((filename) => {
-      const filePath = path.join(postsDirectory, section, filename);
-      const fileContents = fs.readFileSync(filePath, "utf8");
-      return {
-        filename,
-        contents: transformContent(fileContents),
-      };
-    });
-  });
-
+export async function getStaticProps({ params }: any) {
+  const path = params.page.replace(".", "/");
   return {
     props: {
-      post: posts[0][0],
+      post: {
+        contents: loadContent(path),
+      },
+      sections: fetchSections(),
     },
   };
 }
@@ -59,29 +76,26 @@ const MarkdownBlock = ({ content }: { content: string }) => (
 // これでlinkを外から入れらるようになった。
 // mdからメニューを取得してページングできるはず。
 // ぱすぱらむを取得すれば（static prposで)
-const sections: MenuProps = {
+const createProps = (sections: any): MenuProps => ({
   LinkComponent: (item: any) => {
     console.log(item);
     return (
       <span>
-        <a>aa</a>
-        {item.item.title}
+        <a href={item.item.filePath}>{item.item.name}</a>
       </span>
     );
   },
-  sections: [
-    {
-      title: "section1",
-      items: [{ title: "hoge" }],
-    },
-    {
-      title: "section2",
-      items: [{ title: "hoge" }],
-    },
-  ],
-};
+  sections,
+});
 
-export default function Home({ post }: { post: Post }) {
+export default function Home({
+  post,
+  sections,
+}: {
+  post: Post;
+  sections: any;
+}) {
+  const menuProps = createProps(sections);
   const Content = () => (
     <div style={{ padding: "40px" }}>
       {post.contents.map((content: Token, i: number) => {
@@ -105,5 +119,5 @@ export default function Home({ post }: { post: Post }) {
     </div>
   );
 
-  return <App content={<Content />} menu={sections} />;
+  return <App content={<Content />} menu={menuProps} />;
 }
