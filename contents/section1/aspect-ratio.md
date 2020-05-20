@@ -6,6 +6,19 @@ page: 7
 
 比率でレイアウトを組む。
 
+共通 CSS
+
+@BEGIN_COMMON_CSS
+
+```css
+:root {
+  padding: 40px;
+  background: #f4f4f4;
+}
+```
+
+@END_COMMON_CSS
+
 ### img タグを揃える場合
 
 img タグの場合は簡単で width を 100%にするだけである。

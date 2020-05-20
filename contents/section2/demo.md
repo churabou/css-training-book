@@ -1,14 +1,8 @@
 ---
-title: 比率でレイアウトを組む
+title: ブログとかの一覧画面
 section: 1
 page: 7
 ---
-
-比率でレイアウトを組む。
-
-### img タグを揃える場合
-
-img タグの場合は簡単で width を 100%にするだけである。
 
 ### ブロック要素の場合
 
@@ -21,38 +15,132 @@ padding-top が親要素の width をもとに決まることを利用したハ�
 @BEGIN_LIVE_EDITOR
 
 ```css
-.wrapper {
-  position: relative;
-  width: 100px;
+:root {
+  background: #f0f0f0;
+  padding: 40px;
+  --theme-color: #8fcdc4;
+}
+
+#container {
+  width: 400px;
+  margin: 0 auto;
+}
+
+.header {
+  background: #8fcdc4;
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+}
+.card {
+  margin-top: 10px;
+}
+
+.card {
+  background: white;
+  padding: 10px;
+  display: flex;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+}
+
+.card .img-wrapper {
   background: red;
+  flex: 0 0 40%;
 }
 
-.wrapper:before {
-  content: "";
-  display: block;
-  padding-top: 75%; /* 高さを幅の75%に固定 */
+img {
+  flex: 0 0 40%;
+  /*  search with img flex-basis  */
+  width: 0%;
+  object-fit: cover;
 }
 
-.content {
-  /* 親要素いっぱいに広げる */
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+.card-wrapper {
+  flex: 1 1 auto;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.card-wrapper p,
+.card-wrapper h5 {
+  margin: 0px;
+}
+
+.card-date {
+  text-align: right;
+}
+
+.card-tags {
+  color: var(--theme-color);
 }
 ```
 
 ```html
-<div class="wrapper">
-  <div class="content">4:3</div>
+<div id="container">
+  <div class="header">
+    最近の投稿
+  </div>
+  <div class="card">
+    <img
+      src="https://images.unsplash.com/photo-1489533119213-66a5cd877091?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+      alt=""
+    />
+
+    <div class="card-wrapper">
+      <h5 class="card-title">タイトルタイトルタイトル</h5>
+      <div class="card-tags">タグ　タグ　タグ</div>
+      <p class="card-date">2020年01月22日</p>
+    </div>
+  </div>
+  <div class="card">
+    <img
+      src="https://images.unsplash.com/photo-1489533119213-66a5cd877091?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+      alt=""
+    />
+
+    <div class="card-wrapper">
+      <h5 class="card-title">タイトルタイトルタイトル</h5>
+      <div class="card-tags">タグ　タグ　タグ</div>
+      <p class="card-date">2020年01月22日</p>
+    </div>
+  </div>
+  <div class="card">
+    <img
+      src="https://images.unsplash.com/photo-1489533119213-66a5cd877091?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+      alt=""
+    />
+
+    <div class="card-wrapper">
+      <h5 class="card-title">タイトルタイトルタイトル</h5>
+      <div class="card-tags">タグ　タグ　タグ</div>
+      <p class="card-date">2020年01月22日</p>
+    </div>
+  </div>
+  <div class="card">
+    <img
+      src="https://images.unsplash.com/photo-1489533119213-66a5cd877091?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+      alt=""
+    />
+
+    <div class="card-wrapper">
+      <h5 class="card-title">タイトルタイトルタイトル</h5>
+      <div class="card-tags">タグ　タグ　タグ</div>
+      <p class="card-date">2020年01月22日</p>
+    </div>
+  </div>
+  <div class="card">
+    <img
+      src="https://images.unsplash.com/photo-1489533119213-66a5cd877091?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+      alt=""
+    />
+
+    <div class="card-wrapper">
+      <h5 class="card-title">タイトルタイトルタイトル</h5>
+      <div class="card-tags">タグ　タグ　タグ</div>
+      <p class="card-date">2020年01月22日</p>
+    </div>
+  </div>
 </div>
 ```
 
 @END_LIVE_EDITOR
-
-React の場合はうまくラップできる。
-
-```.jsx
-<AspectRatio w="3" h="4>
-```

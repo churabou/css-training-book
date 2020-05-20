@@ -102,7 +102,7 @@ const Page: React.FC<Props> = ({ post, sections }) => {
   const menuProps = createProps(sections);
 
   const commonCSS = pulckHtmlCss(
-    post.contents.find((c) => c.type === "common-css").value
+    post.contents.find((c) => c.type === "common-css")?.value || ""
   ).css;
 
   const Content = () => (
