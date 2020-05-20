@@ -7,7 +7,15 @@ import styled from "styled-components";
 import { transformContent, Token } from "../../lib/transform";
 import { Props as MenuProps } from "../../components/menu";
 
-const fetchSections = () => {
+interface Section {
+  title: string;
+  items: {
+    title: string;
+    path: string;
+  }[];
+}
+
+const fetchSections = (): Section[] => {
   const postsDirectory = path.join(process.cwd(), "contents");
   const sectionDirectories = fs.readdirSync(postsDirectory);
   return sectionDirectories.map((section) => {
@@ -15,47 +23,50 @@ const fetchSections = () => {
     return {
       title: section,
       items: filenames.map((name) => ({
-        name,
-        filePath: `${section}.${name}`,
+        title: name,
+        path: `${section}.${name}`,
       })),
     };
   });
 };
 
-const loadContent = (name: string) => {
-  const postsDirectory = path.join(process.cwd(), "contents", name);
-  const filePath = path.join(postsDirectory);
-  const fileContents = fs.readFileSync(filePath, "utf8");
+const loadContent = (filename: string): Token[] => {
+  const filePath = path.join(process.cwd(), "contents", filename);
+  const fileContents = fs.readFileSync(path.join(filePath), "utf8");
   const content = transformContent(fileContents);
   return content;
 };
 
 export async function getStaticPaths() {
-  const contents = fetchSections().map((section) =>
+  const contents = fetchSections().map((section: Section) =>
     section.items.map((item) => ({
-      params: { page: item.filePath, filePath: "hoge" },
+      params: { page: item.path },
     }))
   );
-
   // flatten
   const paths = Array.prototype.concat.apply([], contents);
   return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }: any) {
+  // HACK section1.demoみたいになっているのでsection1/demoにする
   const path = params.page.replace(".", "/");
-  return {
-    props: {
-      post: {
-        contents: loadContent(path),
-      },
-      sections: fetchSections(),
+  const props: Props = {
+    post: {
+      contents: loadContent(path),
     },
+    sections: fetchSections(),
+  };
+  return {
+    props,
   };
 }
 
-interface Post {
-  contents: Token[];
+interface Props {
+  post: {
+    contents: Token[];
+  };
+  sections: Section[];
 }
 
 const _MDWapper = styled.div`
@@ -76,25 +87,19 @@ const MarkdownBlock = ({ content }: { content: string }) => (
 // これでlinkを外から入れらるようになった。
 // mdからメニューを取得してページングできるはず。
 // ぱすぱらむを取得すれば（static prposで)
-const createProps = (sections: any): MenuProps => ({
+const createProps = (sections: Section[]): MenuProps => ({
   LinkComponent: (item: any) => {
     console.log(item);
     return (
       <span>
-        <a href={item.item.filePath}>{item.item.name}</a>
+        <a href={item.item.path}>{item.item.title}</a>
       </span>
     );
   },
   sections,
 });
 
-export default function Home({
-  post,
-  sections,
-}: {
-  post: Post;
-  sections: any;
-}) {
+const Page: React.FC<Props> = ({ post, sections }) => {
   const menuProps = createProps(sections);
   const Content = () => (
     <div style={{ padding: "40px" }}>
@@ -120,4 +125,6 @@ export default function Home({
   );
 
   return <App content={<Content />} menu={menuProps} />;
-}
+};
+
+export default Page;

@@ -26,6 +26,7 @@ export interface Props {
     title: string;
     items: {
       title: string;
+      path: string;
     }[];
   }[];
 }
