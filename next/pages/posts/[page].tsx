@@ -104,26 +104,21 @@ const Page: React.FC<Props> = ({ post, sections }) => {
   const Content = () => (
     <div style={{ padding: "40px" }}>
       {post.contents.map((content: Token, i: number) => {
+        const key = `${content.type}-${i}`;
         if (content.type === "markdown") {
-          return (
-            <MarkdownBlock
-              key={`${content.type}-${i}`}
-              content={content.value}
-            />
-          );
+          return <MarkdownBlock key={key} content={content.value} />;
         }
         if (content.type === "frontmatter") {
           return (
-            <_MDWapper>
+            <_MDWapper key={key}>
               <h1>{content.value.title}</h1>
             </_MDWapper>
           );
         }
-        return <LiveEditor key={`${content.type}-${i}`} {...content.value} />;
+        return <LiveEditor key={key} {...content.value} />;
       })}
     </div>
   );
-
   return <App content={<Content />} menu={menuProps} />;
 };
 

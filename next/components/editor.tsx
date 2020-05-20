@@ -11,13 +11,14 @@ const Wrapper = styled.div`
     .title {
       width: 60px;
       height: 20px;
-      border: 1px solid #bbb;
       position: absolute;
       top: -20px;
       left: 0;
       z-index: 4;
       line-height: 20px;
       text-align: center;
+      background: white;
+      color: var(--theme-color);
     }
 
     textarea {
@@ -43,7 +44,6 @@ const Wrapper = styled.div`
       margin: 0px;
       z-index: 3;
       pointer-events: none;
-      background: transparent;
     }
   }
 `;
@@ -73,9 +73,9 @@ const CodeEditor: React.FC<{
   <Wrapper>
     <div className="editor">
       <div className="title">{language}</div>
-      {/* <pre>
+      <pre>
         <code className={`language-${language}`}>{content}</code>
-      </pre> */}
+      </pre>
       <textarea
         value={content}
         onChange={(e: any) => setContent(e.target.value)}
