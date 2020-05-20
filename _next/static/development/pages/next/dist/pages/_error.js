@@ -270,7 +270,7 @@ eval("module.exports = function(module) {\n\tif (!module.webpackPolyfill) {\n\t\
 
 /***/ }),
 
-/***/ 2:
+/***/ 3:
 /*!************************************************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fnext%2Fdist%2Fpages%2F_error&absolutePagePath=%2FUsers%2Fchurabou%2Fstudy%2Freact%2Fcss-tutorial%2Fnode_modules%2Fnext%2Fdist%2Fpages%2F_error.js ***!
   \************************************************************************************************************************************************************************************************/
@@ -293,4 +293,4 @@ eval("module.exports = dll_2adc2403d89adc16ead0;//# sourceURL=[module]\n//# sour
 
 /***/ })
 
-},[[2,"static/runtime/webpack.js"]]]);
+},[[3,"static/runtime/webpack.js"]]]);
