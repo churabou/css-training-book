@@ -2,18 +2,9 @@ import Page from "../../components/page";
 import path from "path";
 import fs from "fs";
 import LiveEditor from "../../components/liveEditor";
-import ReactMarkdown from "react-markdown";
-import styled from "styled-components";
+import Markdown from "../../components/Markdown";
 import { transformContent, Token, pulckHtmlCss } from "../../lib/transform";
-import { Props as MenuProps } from "../../components/menu";
-
-interface Section {
-  title: string;
-  items: {
-    title: string;
-    path: string;
-  }[];
-}
+import { Props as MenuProps, Section } from "../../components/menu";
 
 const fetchSections = (): Section[] => {
   const postsDirectory = path.join(process.cwd(), "contents");
@@ -69,33 +60,14 @@ interface Props {
   sections: Section[];
 }
 
-const _MDWapper = styled.div`
-  h1,
-  h2,
-  h3,
-  h4 {
-    color: var(--theme-color);
-  }
-`;
-
-const MarkdownBlock = ({ content }: { content: string }) => (
-  <_MDWapper>
-    <ReactMarkdown source={content} />
-  </_MDWapper>
-);
-
-// これでlinkを外から入れらるようになった。
-// mdからメニューを取得してページングできるはず。
-// ぱすぱらむを取得すれば（static prposで)
-const createProps = (sections: Section[]): MenuProps => ({
-  LinkComponent: (item: any) => {
-    return <a href={item.item.path}>{item.item.title}</a>;
-  },
-  sections,
-});
-
 const App: React.FC<Props> = ({ post, sections }) => {
-  const menuProps = createProps(sections);
+  // linkを外から入れらるようになった。
+  const menuProps: MenuProps = {
+    LinkComponent: (item: any) => {
+      return <a href={item.item.path}>{item.item.title}</a>;
+    },
+    sections,
+  };
 
   const commonCSS = pulckHtmlCss(
     post.contents.find((c) => c.type === "common-css")?.value || ""
@@ -106,13 +78,13 @@ const App: React.FC<Props> = ({ post, sections }) => {
       {post.contents.map((content: Token, i: number) => {
         const key = `${content.type}-${i}`;
         if (content.type === "markdown" || content.type === "common-css") {
-          return <MarkdownBlock key={key} content={content.value} />;
+          return <Markdown key={key} content={content.value} />;
         }
         if (content.type === "frontmatter") {
           return (
-            <_MDWapper key={key}>
+            <div key={key}>
               <h1>{content.value.title}</h1>
-            </_MDWapper>
+            </div>
           );
         }
         return <LiveEditor key={key} {...{ commonCSS, ...content.value }} />;
