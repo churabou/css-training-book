@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "dev": "gatsby develop"
+  },
+  "devDependencies": {
+    "gatsby": "^2.22.4",
+    "gatsby-source-filesystem": "^2.3.7",
+    "gatsby-transformer-remark": "^2.8.12",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}
