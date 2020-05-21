@@ -28,14 +28,7 @@ export const query = graphql`
   }
 `;
 
-interface Props {
-  post: {
-    contents: Token[];
-  };
-  sections: Section[];
-}
-
-const App: React.FC<Props> = ({ post, sections }) => {
+export const createPageProps = ({ post, sections }) => {
   // linkを外から入れらるようになった。
 
   const menuProps: MenuProps = {
@@ -67,11 +60,13 @@ const App: React.FC<Props> = ({ post, sections }) => {
       })}
     </div>
   );
-  return <Page content={<Content />} menu={menuProps} />;
+  return {
+    content: <Content />,
+    menu: menuProps,
+  };
 };
 
 export default ({ data }) => {
-  console.log(data.post);
   const contents = transformContent(data.post.rawMarkdownBody);
 
   const sections = {};
@@ -98,6 +93,5 @@ export default ({ data }) => {
     }),
   };
 
-  console.log(props);
-  return <App {...props} />;
+  return <Page {...createPageProps(props)} />;
 };
