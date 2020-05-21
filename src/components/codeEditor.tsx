@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   .editor {
     position: relative;
     height: 500px;
+    overflow: scroll;
     .title {
       width: 60px;
       height: 20px;
@@ -28,11 +29,13 @@ const Wrapper = styled.div`
       left: 0;
       bottom: 0;
       width: 100%;
+      height: 3000px; // テキストの量に合わせて調整する
       margin: 0;
       font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
       white-space: pre-wrap;
       line-height: 1.5em;
       word-wrap: break-word;
+      font-size: 16px;
     }
 
     textarea {
@@ -42,11 +45,14 @@ const Wrapper = styled.div`
       caret-color: red;
       border: none;
       outline: none;
+      z-index: 3;
     }
 
     pre {
       overflow-y: scroll;
-      z-index: -1;
+
+      font-size: 16px;
+      overflow: auto;
     }
   }
 `;
@@ -87,18 +93,4 @@ const CodeEditor: React.FC<{
     </div>
   </Wrapper>
 );
-
-// tmp jsut preview
-const _CodeEditor: React.FC<{
-  language: string;
-  content: string;
-  setContent: (content: string) => void;
-}> = ({ content, setContent, language }) => (
-  <div>
-    <pre style={{ overflow: "scroll", wordWrap: "break-word" }}>
-      <code className={`language-${language}`}>{content}</code>
-    </pre>
-  </div>
-);
-
 export default CodeEditor;
