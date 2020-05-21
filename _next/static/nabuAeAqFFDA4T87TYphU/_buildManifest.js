@@ -1,1 +1,0 @@
-self.__BUILD_MANIFEST = {"/posts/[page]":["static\u002Fchunks\u002F9f96d65d.cdb005c9aa905d5b5c49.js"]};self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()
