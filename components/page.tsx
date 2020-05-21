@@ -18,13 +18,13 @@ const Layout = styled.div`
       margin: 0px;
     }
     border-bottom: 1px #bbb solid;
-    margin-bottom: 10px;
   }
   .split {
     width: 100%;
     display: flex;
     &-left {
-      width: 27%;
+      width: 350px;
+      border-right: 1px solid #bbb;
     }
     &-right {
       flex: auto;

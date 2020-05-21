@@ -7,8 +7,7 @@ import Prism from "prismjs";
 const Wrapper = styled.div`
   .editor {
     position: relative;
-    height: 300px;
-    overflow-y: scroll;
+    height: 500px;
     .title {
       width: 60px;
       height: 20px;
@@ -27,8 +26,8 @@ const Wrapper = styled.div`
       padding: 10px;
       top: 0;
       left: 0;
+      bottom: 0;
       width: 100%;
-      height: 100%;
       margin: 0;
       font-size: 20px;
       font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
@@ -44,12 +43,11 @@ const Wrapper = styled.div`
       caret-color: red;
       border: none;
       outline: none;
-      z-index: 1;
     }
 
     pre {
-      pointer-events: none;
-      overflow-y: auto;
+      overflow-y: scroll;
+      z-index: -1;
     }
   }
 `;
