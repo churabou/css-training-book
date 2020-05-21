@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   .editor {
     position: relative;
     height: 300px;
+    overflow-y: scroll;
     .title {
       width: 60px;
       height: 20px;

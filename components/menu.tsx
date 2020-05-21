@@ -9,12 +9,25 @@ const Wrapper = styled.div`
   }
   ul {
     margin: 0px;
-    padding: 0px;
+    padding: 10px;
     list-style: none;
     li {
-      padding: 10px 20px;
+      position: relative;
+      height: 50px;
       :hover {
         background: #f4f4f4;
+      }
+      a {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        line-height: 50px;
+        text-decoration: none;
+        :hover {
+          color: orange;
+        }
       }
     }
   }
