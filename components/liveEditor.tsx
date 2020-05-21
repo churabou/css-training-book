@@ -13,6 +13,7 @@ const Wrapper = styled.div`
   .left {
     width: 100%;
     margin-right: 20px;
+    overflow: scroll;
   }
 
   .right {

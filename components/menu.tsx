@@ -23,8 +23,10 @@ const Wrapper = styled.div`
         left: 0;
         right: 0;
         bottom: 0;
-        line-height: 50px;
+        line-height: 30px;
         text-decoration: none;
+        padding: 10px;
+        color: #333;
         :hover {
           color: orange;
         }

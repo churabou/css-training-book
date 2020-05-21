@@ -89,4 +89,17 @@ const CodeEditor: React.FC<{
   </Wrapper>
 );
 
-export default CodeEditor;
+// tmp jsut preview
+const _CodeEditor: React.FC<{
+  language: string;
+  content: string;
+  setContent: (content: string) => void;
+}> = ({ content, setContent, language }) => (
+  <div>
+    <pre style={{ overflow: "scroll", wordWrap: "break-word" }}>
+      <code className={`language-${language}`}>{content}</code>
+    </pre>
+  </div>
+);
+
+export default _CodeEditor;
