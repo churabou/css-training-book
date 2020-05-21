@@ -1,6 +1,6 @@
 ---
 title: ブログとかの一覧画面
-section: 1
+section: 2
 page: 7
 ---
 

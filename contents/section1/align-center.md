@@ -1,7 +1,7 @@
 ---
 title: 右寄せにする方法
 section: 1
-page: 6
+page: 1
 ---
 
 共通 CSS
