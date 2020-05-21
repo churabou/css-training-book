@@ -21,7 +21,7 @@ const Wrapper = styled.div`
       color: var(--theme-color);
     }
 
-    textarea {
+    .sync {
       position: absolute;
       padding: 10px;
       top: 0;
@@ -29,20 +29,24 @@ const Wrapper = styled.div`
       width: 100%;
       height: 100%;
       margin: 0;
-      resize: none;
+      font-size: 20px;
+      font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+      white-space: pre-wrap;
+      line-height: 1.5em;
+      word-wrap: break-word;
+    }
 
+    textarea {
+      resize: none;
+      color: transparent;
+      background: transparent;
       caret-color: red;
+      border: none;
+      outline: none;
+      z-index: 1;
     }
 
     pre {
-      position: absolute;
-      padding: 10px;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      margin: 0px;
-      z-index: 3;
       pointer-events: none;
     }
   }
@@ -73,11 +77,12 @@ const CodeEditor: React.FC<{
   <Wrapper>
     <div className="editor">
       <div className="title">{language}</div>
-      <pre>
+      <pre className="sync">
         <code className={`language-${language}`}>{content}</code>
       </pre>
       <textarea
         value={content}
+        className="sync"
         onChange={(e: any) => setContent(e.target.value)}
       />
     </div>

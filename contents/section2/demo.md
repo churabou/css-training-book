@@ -6,7 +6,7 @@ page: 7
 
 ### ブロック要素の場合
 
-padding-top を指定する。
+padding-taop を指定する。
 padding-top が親要素の width をもとに決まることを利用したハック。
 
 > padding-top and padding-bottom is based on the parent element’s width
