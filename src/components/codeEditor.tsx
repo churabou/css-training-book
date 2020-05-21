@@ -29,7 +29,6 @@ const Wrapper = styled.div`
       bottom: 0;
       width: 100%;
       margin: 0;
-      font-size: 20px;
       font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
       white-space: pre-wrap;
       line-height: 1.5em;
