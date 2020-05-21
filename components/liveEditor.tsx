@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import CodeEditor, { useCodeEditor } from "./editor";
+import CodeEditor, { useCodeEditor } from "./codeEditor";
 
 const Wrapper = styled.div`
   display: flex;

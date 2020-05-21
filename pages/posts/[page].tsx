@@ -1,4 +1,4 @@
-import App from "../../components/page";
+import Page from "../../components/page";
 import path from "path";
 import fs from "fs";
 import LiveEditor from "../../components/liveEditor";
@@ -94,7 +94,7 @@ const createProps = (sections: Section[]): MenuProps => ({
   sections,
 });
 
-const Page: React.FC<Props> = ({ post, sections }) => {
+const App: React.FC<Props> = ({ post, sections }) => {
   const menuProps = createProps(sections);
 
   const commonCSS = pulckHtmlCss(
@@ -119,7 +119,7 @@ const Page: React.FC<Props> = ({ post, sections }) => {
       })}
     </div>
   );
-  return <App content={<Content />} menu={menuProps} />;
+  return <Page content={<Content />} menu={menuProps} />;
 };
 
-export default Page;
+export default App;

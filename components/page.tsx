@@ -1,13 +1,5 @@
-import React, {
-  useState,
-  useReducer,
-  useContext,
-  useCallback,
-  useEffect,
-} from "react";
-
+import React from "react";
 import styled from "styled-components";
-import LiveEditor from "./liveEditor";
 import Menu from "./menu";
 
 const Layout = styled.div`
@@ -33,14 +25,14 @@ const Layout = styled.div`
 `;
 
 interface Props {
-  content: any;
+  content: any; // FIXME
   menu: {
-    LinkComponent?: any;
+    LinkComponent?: any; // FIXME
     sections: any;
   };
 }
 
-const App: React.FC<Props> = ({ content, menu }) => {
+const Page: React.FC<Props> = ({ content, menu }) => {
   return (
     <Layout>
       <header className="header">
@@ -56,4 +48,4 @@ const App: React.FC<Props> = ({ content, menu }) => {
   );
 };
 
-export default App;
+export default Page;

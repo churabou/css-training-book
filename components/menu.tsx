@@ -35,14 +35,16 @@ const Wrapper = styled.div`
   }
 `;
 
+interface Item {
+  title: string;
+  path: string;
+}
+
 export interface Props {
-  LinkComponent?: any;
+  LinkComponent?: React.FC<{ item: Item }>;
   sections: {
     title: string;
-    items: {
-      title: string;
-      path: string;
-    }[];
+    items: Item[];
   }[];
 }
 
@@ -53,7 +55,7 @@ const Menu: React.FC<Props> = ({ sections, LinkComponent }) => {
         <div key={`section-${i}`}>
           <h3>section.title</h3>
           <ul>
-            {section.items.map((item: any, i: number) => (
+            {section.items.map((item: Item, i: number) => (
               <li key={`page-${i}`}>{<LinkComponent item={item} />}</li>
             ))}
           </ul>
