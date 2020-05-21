@@ -1,4 +1,5 @@
 module.exports = {
+  pathPrefix: "/css-traning-book",
   plugins: [
     {
       resolve: `gatsby-source-filesystem`,

@@ -33,7 +33,11 @@ export const createPageProps = ({ post, sections }) => {
 
   const menuProps: MenuProps = {
     LinkComponent: (item: any) => {
-      return <a href={item.item.path}>{item.item.title}</a>;
+      return (
+        <Link to={item.item.path} activeClassName="active">
+          {item.item.title}
+        </Link>
+      );
     },
     sections,
   };

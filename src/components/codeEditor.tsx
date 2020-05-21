@@ -102,4 +102,4 @@ const _CodeEditor: React.FC<{
   </div>
 );
 
-export default _CodeEditor;
+export default CodeEditor;

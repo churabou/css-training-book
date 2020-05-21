@@ -27,8 +27,10 @@ const Wrapper = styled.div`
         text-decoration: none;
         padding: 10px;
         color: #333;
-        :hover {
-          color: orange;
+
+        &.active {
+          font-weight: bold;
+          color: var(--theme-color);
         }
       }
     }
