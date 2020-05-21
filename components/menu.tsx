@@ -48,6 +48,8 @@ export interface Props {
   }[];
 }
 
+export type Section = Props["sections"][0];
+
 const Menu: React.FC<Props> = ({ sections, LinkComponent }) => {
   return (
     <Wrapper>
