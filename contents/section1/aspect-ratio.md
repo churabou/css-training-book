@@ -37,7 +37,7 @@ padding-top が親要素の width をもとに決まることを利用したハ�
 .wrapper {
   position: relative;
   width: 100px;
-  background: red;
+  background: white;
 }
 
 .wrapper:before {
