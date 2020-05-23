@@ -107,3 +107,38 @@ main div.right {
 ```
 
 @END_LIVE_EDITOR
+
+### コンポネント
+
+@BEGIN_LIVE_EDITOR
+
+```css
+div {
+  display: flex;
+  width: 300px;
+  padding: 8px;
+}
+
+input {
+  flex: auto;
+  margin-right: 5px;
+}
+
+button {
+  padding: 10px;
+  background: tomato;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+}
+```
+
+```html
+<div>
+  <input></input>
+  <button>送信</button>
+</div>
+```
+
+@END_LIVE_EDITOR

@@ -30,7 +30,7 @@ const Wrapper = styled.div`
 
         &.active {
           font-weight: bold;
-          color: var(--theme-color);
+          /* color: var(--theme-color); */
         }
       }
     }

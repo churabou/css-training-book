@@ -5,7 +5,8 @@ import Prism from "prismjs";
 // FIXME: 自動シンタックスハイライトつきエディター
 
 const Wrapper = styled.div`
-  height: 300px;
+  height: 400px;
+  background: black;
   overflow: scroll;
   .editor {
     position: relative;
