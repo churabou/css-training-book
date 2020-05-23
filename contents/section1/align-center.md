@@ -1,5 +1,5 @@
 ---
-title: 右寄せにする方法
+title: 中央寄せにする方法
 section: 1
 page: 1
 ---
