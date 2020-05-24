@@ -4,7 +4,7 @@ section: 2
 page: 7
 ---
 
-### ブロック要素の場合
+### Google Chrome のショートカット編集モーダル
 
 @BEGIN_LIVE_EDITOR
 
@@ -15,7 +15,7 @@ page: 7
   background: #f0f0f0;
 }
 
-.modal {
+.dialog {
   background: white;
   width: 400px;
   border-radius: 8px;
@@ -23,50 +23,47 @@ page: 7
   padding: 24px;
 }
 
-.modal > div {
-  height: 60px;
-}
-
-.modal > div {
+.dialog > div {
   margin-top: 16px;
 }
 
-h3 {
+.dialog h3 {
   margin: 0;
 }
 
-label {
+.dialog label {
   display: flex;
   height: 100%;
   flex-direction: column;
 }
 
-label span {
+.dialog label span {
   font-size: 0.7em;
 }
 
-input {
+.dialog input {
   background: #f0f0f0;
-  color: red;
+  color: #333;
   flex: auto;
   border: none;
   outline: none;
   border-radius: 4px;
+  padding: 10px;
 }
 
-input:focus {
+.dialog input:focus {
   background-size: 100% 2px, 100% 1px;
 }
 
-input:focus + label span {
+.dialog input:focus + label span {
   color: orange;
 }
 
-.button-container {
+.dialog .button-container {
   display: flex;
 }
 
-button {
+.dialog button {
   padding: 10px;
   border: none;
   border-radius: 4px;
@@ -81,19 +78,17 @@ button:not(:last-child) {
 }
 
 button:first-child {
-  padding: 10px;
   margin-right: auto;
 }
 
 button:last-child {
-  padding: 10px;
   margin-left: 10px;
 }
 ```
 
 ```html
 <div class="container">
-  <div class="modal">
+  <div class="dialog">
     <h3>ショートカットの編集</h3>
     <div>
       <label>

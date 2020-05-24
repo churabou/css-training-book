@@ -8,9 +8,9 @@ page: 7
 @BEGIN_COMMON_CSS
 
 ```css
-* {
+:root {
   background: #f4f4f4;
-  border: 1px solid #bbb;
+  padding: 40px;
 }
 ```
 
@@ -36,10 +36,12 @@ body のコンテントが大きいと縮まってしまうので flex
 .cell {
   width: 100px;
   height: 100px;
-  backgroud: white;
+  line-height: 100px;
+  text-align: center;
+  border: 1px solid white;
 }
 .cell:hover {
-  background: #f3f3f3;
+  background: white;
 }
 ```
 
