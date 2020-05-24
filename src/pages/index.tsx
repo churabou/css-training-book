@@ -1,11 +1,7 @@
 import React from "react";
 import Page from "../components/page";
-import LiveEditor from "../components/liveEditor";
-import Markdown from "../components/markdown";
-import { transformContent, Token, pulckHtmlCss } from "../lib/transform";
-import { Props as MenuProps, Section } from "../components/menu";
-
-import { graphql, Link } from "gatsby";
+import { graphql } from "gatsby";
+import { convertDataToProps } from "../components/content";
 
 export const query = graphql`
   {
@@ -28,74 +24,7 @@ export const query = graphql`
   }
 `;
 
-export const createPageProps = ({ post, sections }) => {
-  // linkを外から入れらるようになった。
-
-  const menuProps: MenuProps = {
-    LinkComponent: (item: any) => {
-      return (
-        <Link to={item.item.path} activeClassName="active">
-          {item.item.title}
-        </Link>
-      );
-    },
-    sections,
-  };
-
-  const commonCSS = pulckHtmlCss(
-    post.contents.find((c) => c.type === "common-css")?.value || ""
-  ).css;
-
-  const Content = () => (
-    <div style={{ padding: "40px" }}>
-      {post.contents.map((content: Token, i: number) => {
-        const key = `${content.type}-${i}`;
-        if (content.type === "markdown" || content.type === "common-css") {
-          return <Markdown key={key} content={content.value} />;
-        }
-        if (content.type === "frontmatter") {
-          return (
-            <div key={key}>
-              <h1>{content.value.title}</h1>
-            </div>
-          );
-        }
-        return <LiveEditor key={key} {...{ commonCSS, ...content.value }} />;
-      })}
-    </div>
-  );
-  return {
-    content: <Content />,
-    menu: menuProps,
-  };
-};
-
 export default ({ data }) => {
-  const contents = transformContent(data.post.rawMarkdownBody);
-
-  const sections = {};
-  data.sections.edges.forEach((edge) => {
-    const { section, title } = edge.node.frontmatter;
-    if (!sections[section]) {
-      sections[section] = [];
-    }
-    sections[section].push({
-      title: title,
-      path: edge.node.id,
-    });
-  });
-
-  const props = {
-    post: {
-      contents,
-    },
-    sections: Object.keys(sections).map((key) => {
-      return {
-        title: "hoge",
-        items: sections[key],
-      };
-    }),
-  };
-
-  return <Page {...createPageProps(props)} />;
+  const props = convertDataToProps(data);
+  return <Page {...props} />;
 };

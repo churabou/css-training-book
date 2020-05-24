@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Menu from "./menu";
+import { Content } from "./content";
 
 const Layout = styled.div`
   display: flex;
@@ -29,7 +30,7 @@ const Layout = styled.div`
 `;
 
 interface Props {
-  content: any; // FIXME
+  post: any; // FIXME
   menu: {
     LinkComponent?: any; // FIXME
     sections: any;
@@ -56,7 +57,7 @@ const Scroll: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   </ScrollWrapper>
 );
 
-const Page: React.FC<Props> = ({ content, menu }) => {
+const Page: React.FC<Props> = ({ post, menu }) => {
   return (
     <Layout>
       <header className="header">
@@ -67,7 +68,9 @@ const Page: React.FC<Props> = ({ content, menu }) => {
           <Menu {...menu} />
         </div>
         <div className="split-right">
-          <Scroll>{content}</Scroll>
+          <Scroll>
+            <Content post={post} />
+          </Scroll>
         </div>
       </div>
     </Layout>
