@@ -57,7 +57,7 @@ const Menu: React.FC<Props> = ({ sections, LinkComponent }) => {
     <Wrapper>
       {sections.map((section: any, i: number) => (
         <div key={`section-${i}`}>
-          <h3>section.title</h3>
+          <h3>{section.title}</h3>
           <ul>
             {section.items.map((item: Item, i: number) => (
               <li key={`page-${i}`}>{<LinkComponent item={item} />}</li>

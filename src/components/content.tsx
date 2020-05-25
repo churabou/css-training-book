@@ -26,9 +26,14 @@ export const convertDataToProps = (data) => {
     });
   });
 
+  const sectionTitle = {
+    1: "基本のスタイリング、レイアウト",
+    2: "コンポネント実装例",
+    3: "実装してみた",
+  };
   const sections = Object.keys(sectionMap).map((key) => {
     return {
-      title: "hoge",
+      title: sectionTitle[key],
       items: sectionMap[key],
     };
   });
