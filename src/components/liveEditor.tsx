@@ -11,12 +11,14 @@ const Wrapper = styled.div`
   }
 
   .left {
-    width: 100%;
     margin-right: 20px;
+    flex: 1;
+    width: 10px;
+    word-wrap: break-word;
   }
 
   .right {
-    width: 100%;
+    flex: 1;
     background: white;
     iframe {
       border: none;
@@ -41,20 +43,18 @@ const LiveEditor: React.FC<{
   });
 
   return (
-    <div>
-      <Wrapper>
-        <div className="left">
-          <CodeEditor {...htmlEditor} />
-          <br></br>
-          <CodeEditor {...cssEditor} />
-        </div>
-        <div className="right">
-          <iframe
-            srcDoc={`<html><style>${commonCSS}${cssEditor.content}</style><body>${htmlEditor.content}</body></html>`}
-          />
-        </div>
-      </Wrapper>
-    </div>
+    <Wrapper>
+      <div className="left">
+        <CodeEditor {...htmlEditor} />
+        <br></br>
+        <CodeEditor {...cssEditor} />
+      </div>
+      <div className="right">
+        <iframe
+          srcDoc={`<html><style>${commonCSS}${cssEditor.content}</style><body>${htmlEditor.content}</body></html>`}
+        />
+      </div>
+    </Wrapper>
   );
 };
 
